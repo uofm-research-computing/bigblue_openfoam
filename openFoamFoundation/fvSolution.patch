@@ -1,0 +1,11 @@
+--- cavity/system/fvSolution	2025-03-25 01:30:06.324349655 -0500
++++ cavity.old/system/fvSolution	2025-03-25 01:29:01.669925360 -0500
+@@ -40,7 +40,7 @@
+     }
+ }
+ 
+-PIMPLE
++PISO
+ {
+     nCorrectors     2;
+     nNonOrthogonalCorrectors 0;
