@@ -10,7 +10,7 @@ To use the precompiled version in /opt/ohpc/pub/apps/uofm/openfoam.org, do the f
 This will create a "~/.OpenFOAM" directory with some of the build options.
 
 ## Every Submission
-Then, in your submission script, add the following line:
+This uses openmpi/4.1.6/gcc.8.5.0/mt and paraview modules. Your job submission script can use the following line to load BigBlue's openfoam environment variables:
 ```
 source /opt/ohpc/pub/apps/uofm/openfoam.org/12/use
 ```
@@ -25,6 +25,7 @@ This will copy a directory from "/opt/ohpc/pub/apps/uofm/openfoam.org/12/OpenFOA
 
 # Job
 These jobs have multiple stages. Usually the first, "preprocessing", stage involves creating the mesh with blockMesh and splitting the data among processors with decomposePar. You need to use a "decomposeParDict" file to define the type of domain decomposition for your system. The second stage should be the bulk of your calculation where the system is time-stepped until it reaches a finished state. In the example case, this occurs when the system is at 500 seconds. The final, "post-processing", stage usually reconstructs the final state with "reconstructPar" and may perform other calculations on the data. Depending on the size of the final data, this stage might take a long time. If any of the pre and post-processing stages take as long as the simulation time, you should probably split the job into multiple [job dependencies](https://slurm.schedmd.com/sbatch.html#OPT_dependency) to take better advantage of the cluster resources.
+Note that with this version of openmpi, you do have threads available, but you do not have to specify the number of threads/cores/tasks/processors or a machinefile to mpirun/mpiexec. It should just work with SLURM `--ntasks` and `--cpus-per-task`. Please, do not run this on the login node.
 
 ## Submit the CPU/MPI job
 After running initialize.sh and setup.sh, run the following to submit the job in the cavity directory:

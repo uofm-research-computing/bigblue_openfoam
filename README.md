@@ -1,6 +1,12 @@
 # Introduction
 The following examples are adopted from OpenFOAM incompressible cavity tutorials. Paraview can be used to visualize the problem and solution. The compiled versions use OpenMPI 4.1.6 with multithreading enabled. Each of the example directories, openFoamFoundation and openFoamLtd, correspond to two of the most widely used variants of openfoam from [OpenFOAM Foundation](https://openfoam.org) and [OpenFOAM Ltd](https://openfoam.com). I'm not endorsing either as better than the other, but there are differences between the two. The versions used in each are version 12 for openFoamLtd and 2412 for openFoamFoundation.
 
+# Download and run examples
+Run the following command to clone these openfoam slurm examples:
+```
+git clone https://github.com/uofm-research-computing/bigblue_openfoam.git
+```
+
 # MPI notes
 Either version of openfoam use the same workflow for many calculations. You do not need to specify the number of tasks or a machine/host file in the mpirun line if you use the BigBlue's openmpi modules. Another note is that the meshing step is typically run on a single thread. And finally, the MPI workflow of openfoam uses an explicit domain splitting with the decomposePar program. You must specify the number of subdomains, one per CPU-core, in advance of submitting your job in its configuration file. Again, see the cavity examples for more information.
 
